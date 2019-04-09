@@ -1,7 +1,14 @@
-//  api for giphy 
+//Array of topics
+
+var topics = ["hawaii","island","volcano"]
+
+// Need to add logic to dynamically update buttons to click with above topics
+
+
+//Button click calls Giphy API
 $("#done").on("click", function() {
 
-    var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=CGhOWJEeKEf4TLyMFomZTuIDYpCdWGKV&tag=hawaii";
+var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=CGhOWJEeKEf4TLyMFomZTuIDYpCdWGKV&tag=hawaii";
     console.log(queryURL);
     $("display-gif").empty();
     $.ajax({
@@ -9,20 +16,21 @@ $("#done").on("click", function() {
       method: "GET"
     })
   
-    // After the data from the AJAX request comes back
       .then(function(response) {
+
+
+// Need to add logic to dynamically search by topics, ratings, etc
+// Saving the image_original_url property
+      var imageUrl = response.data.image_original_url;
   
-      // Saving the image_original_url property
-        var imageUrl = response.data.image_original_url;
+// Creating and storing image
+      var display = $("<img>");
+
   
-      // Creating and storing an image tag
-        var display = $("<img>");
+      display.attr("src", imageUrl);
+      display.attr("alt", "display");
   
-      // Setting the congratulation src attribute to imageUrl
-        display.attr("src", imageUrl);
-        display.attr("alt", "display");
-  
-      // Prepending the congratulation to the images div
+//Displaying addtional images when button is clicked 
         $(".display-gif").prepend(display);
       });
   
